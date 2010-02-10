@@ -51,8 +51,8 @@ class LetterTree
 	end
 end
 
-lt = LetterTree.new('omg')
-lt.add('oa')
-puts lt.is_word('omg')
-puts lt.is_word('om')
-puts lt.is_word('omgf')
+#lt = LetterTree.new('omg')
+#lt.add('oa')
+#puts lt.is_word('omg')
+#puts lt.is_word('om')
+#puts lt.is_word('omgf')
