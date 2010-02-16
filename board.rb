@@ -16,33 +16,58 @@ class Die
   end
 end
 
-class Board
-  
-  def initialize
-    @board = Array.new(4) { Array.new(4) }
-    
-    load_defaults()
-  end
+class BoardNode
+  @die
+  attr_accessor :position
+  # position should be an enumeration starting at 0 = top
+  # 		1     2            3        4             5         6           7        8
+  # attr_accessor :top, :top_right, :right, :bottom_right, :bottom, :bottom_left, :left, :top_left
 
-  def load_defaults
-    (0..3).each do |j|
-      (0..3).each do |k|
-        @board[j][k] = Die.new(%w{a b c d e f})
-      end
-    end
-  end
-
-  # Josh should refactor this
-  def show_board
-    (0..3).each do |j|
-      (0..3).each do |k|
-        print @board[j][k].getLetter
-        print ' '
-      end
-      puts
-    end
+  def initialize(letters)
+    @die = Die.new(letters)
+    @position = []
   end
 end
 
-#b = Board.new
-#b.show_board
+class Board
+  def initialize
+    @b = []
+    (0..15).each do |i|
+      @b[i] = BoardNode.new(%w(a b c d e f))
+    end
+    set_up_network
+  end
+
+  def set_up_network
+    # top/bottom
+    (0..11).each do |i| # don't include bottom row
+      @b[i].position[4] = @b[i+4]
+      @b[i+4].position[0] = @b[i]
+    end
+    # left/right
+    (0..15).each do |i|
+      if (i+1)%4 != 0 # don't include right column
+	@b[i].position[2] = @b[i+1]
+	@b[i+1].position[6] = @b[i]
+      end
+    end
+    # +
+    (0..11).each do |i| #don't include bottom row
+      if (i+1)%4 != 0 # don't include right column
+        @b[i].position[3] = @b[i+5]
+	@b[i+5].position[7] = @b[i]
+      end
+    end
+    # -
+    (0..11).each do |i| #don't include bottom row
+      if i%4 != 0 # don't include left column
+        @b[i].position[5] = @b[i+3]
+	@b[i+3].position[1] = @b[i]
+      end
+    end
+    puts @b.index(@b[6])
+  end
+end
+
+b = Board.new
+
