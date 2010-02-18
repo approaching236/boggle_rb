@@ -67,7 +67,30 @@ class Board
     end
     puts @b.index(@b[6])
   end
+
+  def find_a_path
+    s = []
+    n = @b[0]
+    s.push(n)
+    puts s
+    while (no_mas == false)
+      no_mas = true
+      (0..7).each do |i|
+        # if the node at i isn't null
+	# and
+	# s doesn't include that node
+        if (n.position[i] != nil and s.include?(n.position[i]))
+	  n = n.position[i]
+	  puts "found one #{n}"
+	  s.push(n)
+	  no_mas = false
+	end
+      end
+    end
+    puts s
+  end
 end
 
 b = Board.new
+b.find_a_path
 
