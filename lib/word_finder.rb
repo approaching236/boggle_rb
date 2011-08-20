@@ -30,5 +30,5 @@ class WordFinder
   end
 end
 
-wf = WordFinder.new
-wf.traverse
+# wf = WordFinder.new
+# wf.traverse
