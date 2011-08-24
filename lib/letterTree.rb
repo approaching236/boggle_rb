@@ -65,16 +65,18 @@ class LetterTree
 
   # does an in order traversal of the words in the tree
   def list_words(parent_string = '')
-    words = []
+    words = Array.new
     ('A'..'Z').to_a.each do |c|
       if @children[c] != nil 
-	if @children[c].word != nil
-	  words <<  parent_string + c 
+	if @children[c].word == true
+	  words << parent_string + c 
 	end
-	@children[c].list_words(parent_string + c) if @children[c].has_children?
+	if @children[c].has_children?
+	  words << @children[c].list_words(parent_string + c) 
+	end
       end
     end
-    puts words.inspect
+    words.flatten
   end
 
 end

@@ -17,8 +17,8 @@ def play_mode(b)
 end
 
 b = Board.new
-b.shake(16)
-b.show_board
+b.shake
+# b.show_board
 
 DictionaryHandler.new.list_mode(b)
 

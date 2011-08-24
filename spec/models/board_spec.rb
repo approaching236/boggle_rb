@@ -76,5 +76,62 @@ describe Board do
     board.b[5].used.should be_nil
   end
 
+  it "should find some arbitrary words consistantly" do
+    100.times do
+      arbitrary_word = 
+	board.b[5].letter + 
+	board.b[6].letter + 
+	board.b[9].letter + 
+	board.b[10].letter + 
+	board.b[7].letter + 
+	board.b[2].letter
+      lt = LetterTree.new
+      lt.add(arbitrary_word)
+      board.report_words_in_lt(lt).should include arbitrary_word
+    end
+
+    100.times do
+      arbitrary_word = 
+	board.b[9].letter + 
+	board.b[14].letter + 
+	board.b[13].letter + 
+	board.b[10].letter
+      lt = LetterTree.new
+      lt.add(arbitrary_word)
+      board.report_words_in_lt(lt).should include arbitrary_word
+    end
+    
+    100.times do
+      arbitrary_word = 
+	board.b[4].letter + 
+	board.b[5].letter + 
+	board.b[10].letter + 
+	board.b[11].letter
+      lt = LetterTree.new
+      lt.add(arbitrary_word)
+      board.report_words_in_lt(lt).should include arbitrary_word
+    end
+
+    100.times do
+      arbitrary_word_prefix = 
+	board.b[4].letter + 
+	board.b[5].letter + 
+	board.b[10].letter + 
+	board.b[11].letter
+      arbitrary_word = 
+	board.b[4].letter + 
+	board.b[5].letter + 
+	board.b[10].letter + 
+	board.b[11].letter + 
+	board.b[6].letter + 
+	board.b[9].letter
+      lt = LetterTree.new
+      lt.add(arbitrary_word_prefix)
+      lt.add(arbitrary_word)
+      board.report_words_in_lt(lt).should include arbitrary_word_prefix
+      board.report_words_in_lt(lt).should include arbitrary_word
+    end
+  end
+
 end
 

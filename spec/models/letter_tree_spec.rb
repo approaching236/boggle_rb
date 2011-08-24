@@ -24,7 +24,10 @@ describe LetterTree do
 
   it "should return an array of words" do
     lt.add("BAT")
+    # puts lt.list_words.inspect
     lt.list_words.should include "BAT"
+    lt.list_words.should_not include "BA"
+    lt.list_words.should_not include "BATE"
   end
 
 end

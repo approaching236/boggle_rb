@@ -99,14 +99,8 @@ class Board
     return nil
   end
 
-  def shake(n)
-    # swap dice n times
-    n.times do
-      a, b = rand(16), rand(16)
-      tmp = @b[a].die
-      @b[a].die = @b[b].die
-      @b[b].die = tmp
-    end
+  def shake
+    @b.shuffle
 
     # shake each die
     (0..15).each do |i|
