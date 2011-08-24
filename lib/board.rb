@@ -123,9 +123,17 @@ class Board
       if current_letter_node
 	words += report_search(current_letter_node, @b[i], @b[i].letter)
       end
+      unmark_used_nodes
     end
     words.uniq.sort
   end
+
+  def unmark_used_nodes
+    (0..15).each do |i|
+      @b[i].used = nil
+    end
+  end
+
 
   protected
 
@@ -149,13 +157,6 @@ class Board
 
       board_node.used = nil
       tmp_words
-    end
-
-    # Shouldn't be used. Cleanup should be done as you go.
-    def unmark_used_nodes
-      (0..15).each do |i|
-	@b[i].used = nil
-      end
     end
 
     # shouldn't be used directly

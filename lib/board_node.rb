@@ -10,13 +10,16 @@ class BoardNode
   # Returns an array of positions that contain char
   #   doesn't return board index
   def unused_nodes_with(char)
+    # puts unused_nodes
+    # puts position[unused_nodes.first].letter
+    # s = unused_nodes.delete_if { |node| position[node].letter == char }
     s = []
     (0..7).each do |i|
-      if position[i] and !position[i].used and position[i].die.getLetter == char
-        s.push(i)
+      if position[i] && !position[i].used
+        s << i if position[i].die.getLetter == char
       end
     end
-    return s
+    s
   end
 
   # Returns an array of unused neighbors
@@ -24,11 +27,11 @@ class BoardNode
   def unused_nodes
     s = []
     (0..7).each do |i|
-      if position[i] and !position[i].used
-        s.push(i)
+      if position[i] && !position[i].used
+        s << i
       end
     end
-    return s
+    s
   end
 
   def letter

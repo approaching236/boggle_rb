@@ -1,6 +1,6 @@
 class Die
   attr_accessor :face
-  @letters
+  attr_accessor :letters
 
   def initialize(letters)
     @letters = letters

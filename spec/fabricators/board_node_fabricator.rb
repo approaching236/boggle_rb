@@ -1,4 +1,3 @@
 Fabricator(:board_node) do
-  die { Fabricate(:die) }
-  position { rand(6) }
+  on_init { init_with(Array.new(6) { (rand(122-97) + 97).chr }.join.upcase) }
 end
